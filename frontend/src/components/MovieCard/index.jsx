@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const movie = {
     id: 1,
-    image: "https://files.fm/thumb_show.php?i=59wrqvyrq",
-    title: "Te amo!",
+    image: "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg",
+    title: "The Witcher",
     count: 2,
     score: 4.5
 };
