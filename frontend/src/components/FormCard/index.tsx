@@ -1,20 +1,30 @@
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link} from 'react-router-dom';
+import { Movie } from 'types/movie';
+import { BASE_URL } from 'utils/requests';
 import './styles.css'
 
-const movie = {
-    id: 1,
-    image: "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg",
-    title: "The Witcher",
-    count: 2,
-    score: 4.5
-};
+type Props = {
+    movieId : String;
+}
 
-function Form() {
+function FormCard({movieId}:Props) {
+
+    const [movie, setMovie] = useState<Movie>();
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/movies/${movieId}`)
+        .then(response => {
+            setMovie(response.data);
+        });
+    }, [movieId]);
+
     return (
         <div className="dsmovie-form-container">
-            <img className="dsmovie-movie-card-image" src={movie.image} alt={movie.title} />
+            <img className="dsmovie-movie-card-image" src={movie?.image} alt={movie?.title} />
             <div className="dsmovie-card-bottom-container">
-                <h3>{movie.title}</h3>
+                <h3>{movie?.title}</h3>
                 <form className="dsmovie-form">
                     <div className="form-group dsmovie-form-group">
                         <label htmlFor="email">Informe seu email</label>
@@ -44,4 +54,4 @@ function Form() {
         </div >
     );
 }
-export default Form;
+export default FormCard;
